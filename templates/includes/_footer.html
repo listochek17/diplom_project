@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="bd-footer bg-body-secondary py-5">
+    <div class="container d-flex align-items-center">
+        <div class="col-3">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'images/Без названия.png' %}" alt="">
+            </a>
+        </div>
+        <div class="col-3 d-flex grid gap-3">
+            <ul class="list-group">
+                <li class="list-group-item ">
+                    <a class="text-black text-decoration-none" href="">Главное</a>
+                </li>
+                <li class="list-group-item mt-2">
+                    <a class="text-black text-decoration-none" href="{% url 'feedback' %}">Обратна связь</a>
+                </li>
+            </ul>
+            <ul class="list-group">
+                <li class="list-group-item ">
+                    <a class="text-black text-decoration-none" href="">Telegram</a>
+                </li>
+                <li class="list-group-item mt-2">
+                    <a class="text-black text-decoration-none" href="">WK</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-6">
+            <form class="d-flex align-items-end" action="">
+                <label class="w-100">
+                    Email
+                    <input type="text" class="form-control" placeholder="Ваша почта">
+                </label>
+                <button class="btn btn-outline-info ms-2">Отправить</button>
+            </form>
+            <div class="links mt-3 d-flex column-gap-3">
+                <a href="" class="text-black text-decoration-none">
+                    <b>Номер телефона:</b>
+                    +998(93)278-47-72
+                </a>
+                <a href="" class="text-black text-decoration-none">
+                    <b>Почта:</b>
+                    texsup@gmail.com
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

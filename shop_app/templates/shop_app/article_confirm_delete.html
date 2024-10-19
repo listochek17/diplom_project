@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Подтвердите удаления товара из биржы: {{ article.title }}
+{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>
+        Вы действительно хотите удалить товар: <b>{{ article.title }}</b>
+    </p>
+    <input type="submit" class="btn btn-danger" value="Да, удалить">
+    <a href="{% url 'detail' article.pk %}" class="btn btn-primary">Вернуться назад</a>
+</form>
+{% endblock %}

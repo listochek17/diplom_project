@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% if 'add' in request.path %}
+создать статью
+{% elif 'edit' in request.path %}
+изменить статью
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark">
+            {% if 'add' in request.path %}
+            create
+            {% elif 'edit' in request.path %}
+            change
+            {% endif %}
+        </button>
+    </form>
+</div>
+{% endblock %}

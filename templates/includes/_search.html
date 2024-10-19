@@ -1,0 +1,16 @@
+<div class="container mt-2 ">
+    <form class="d-flex" role="search" action="{% url 'search' %}">
+        <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">
+            <i class="bi bi-search"></i>
+        </button>
+    </form>
+    <div class="d-flex align-items-center gap-2 ramka">
+        <h2>Вы недавно искали: </h2>
+        <div class="d-flex gap-3">
+            {% for i in history %}
+            <a class="none_decoration" href="?q={{ i }}">{{i}},</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

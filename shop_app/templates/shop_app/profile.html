@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль: {{ user_obj.username }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex gap-3">
+        <a href="{% url 'storage' %}" class="btn btn-success">
+            <i class="bi bi-cart4"></i>
+            Моя корзина
+        </a>
+    </div>
+    <ul class="list-group list-group-action my-4">
+        <li class="list-group-item list-group-item-action"><b>Username: </b>{{ user_obj.username }}</li>
+        <li class="list-group-item list-group-item-action"><b>Email: </b>{{ user_obj.email }}</li>
+        <li class="list-group-item list-group-item-action"><b>First name: </b>{{ user_obj.first_name }}</li>
+        <li class="list-group-item list-group-item-action"><b>Total articles: </b>{{ total_articles }}</li>
+        <li class="list-group-item list-group-item-action"><b>Total purchases: </b>{{total_purchases}}</li>
+        <li class="list-group-item list-group-item-action"><b>Total comments: </b>{{ total_comments }}</li>
+    </ul>
+    <div class="row row-gap-4">
+        {% for article in articles %}
+        <div class="col-3">{% include 'includes/_card.html' %}</div>
+        {% endfor %}
+    </div>
+    {% include 'includes/_pagination.html' %}
+</div>
+{% endblock %}

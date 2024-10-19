@@ -1,0 +1,76 @@
+{% load static %}
+{% load shop_tags%}
+{% if request.user.is_authenticated %}
+{% shop_storage request as storage %}
+{% endif %}
+
+{% if request.user.is_authenticated %}
+{% shop_favorite request as favorite_article %}
+{% endif %}
+
+<div class="card">
+    {% if request.user.is_authenticated %}
+    {% if article not in favorite_article %}
+    <a class="icon" href="{% url 'favorite_view' article.pk %}">
+        <i class="bi bi-heart"></i>
+    </a>
+    {% else %}
+    <a class="icon" href="{% url 'remove_favorites' article.pk %}">
+        <i class="bi bi-heart-fill"></i>
+    </a>
+    {% endif %}
+    {% endif %}
+    {% if article.preview %}
+    <img src="{{ article.preview.url }}" class="card-img-top article-img" alt="...">
+    {% else %}
+    <img src="{% static 'images/Без названия (1).png' %}" class="card-img-top" alt="...">
+    {% endif %}
+
+    <div class="card-body">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <p class="card-text">{{ article.short_description }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <b>Описание: </b>{{ article.full_description }}
+        </li>
+        <li class="list-group-item">
+            <b>Продавец: </b>{{ article.author }}
+        </li>
+        <li class="list-group-item">
+            <b>Количество покупок: </b>{{ article.shopping }}
+        </li>
+        <li class="list-group-item">
+            <b>Цена: </b>{{ article.cost }} <b>$</b>
+        </li>
+    </ul>
+    <div class="card-body">
+        {% if not request.user.is_authenticated %}
+        <a class="none_decoration" href="{% url 'login' %}">
+            <i class="bi bi-person-plus-fill"></i>
+            Зарегайтесь
+        </a>
+        {% else %}
+        {% if article in storage %}
+        <a href="{% url 'storage' %}" class="none_decoration">
+            <i class="bi bi-cart-check"></i>
+            Товар в корзине
+        </a>
+        {% else %}
+        {% if article.quantity == 0 %}
+        <b>Товар не доступен</b>
+        <br>
+        {% else %}
+        <a href="{% url 'storage_add' article.pk %}" class="none_decoration">
+            <i class="bi bi-cart-plus"></i>
+            Добавить в корзину
+        </a>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        <a href="{% url 'detail' article.pk %}" class="card-link none_decoration">
+            <i class="bi bi-stickies"></i>
+            Подробнее о товаре
+        </a>
+    </div>
+</div>

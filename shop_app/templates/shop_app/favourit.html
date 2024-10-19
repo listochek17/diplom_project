@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Категория: {{ category_title }}
+{% endblock %}
+
+{% block content %}
+{% include 'includes/_search.html' %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <h1>{{ category_title }}</h1>
+    </div>
+    <div class="container">
+            <div class="col-10">
+                <div class="row row-gap-4">
+                    {% for article in favorite_article %}
+                    <div class="col-3">{% include 'includes/_card.html' %}</div>
+                    {% endfor %}
+                </div>
+                {% include 'includes/_pagination.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Корзина
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Корзина</h1>
+    {% if storage %}
+    <a href="{% url 'storage_delete' %}">
+        <button type="button" class="btn costume_btn">очистить корзину</button>
+    </a>
+
+    <ul class="full_storage">
+        <br>
+        {% for i in storage %}
+        {% if i.product %}
+        <div class="storage">
+            {% if i.product.preview %}
+            <img src="{{ i.product.preview.url }}" alt="" class="storage_img">
+            {% else %}
+            <img src="{% static 'images/Без названия (1).png' %}" alt="" class="storage_img">
+            {% endif %}
+            <ul>
+                <b>{{ i.product.title }}</b>
+                <br>
+                <b>Количество: {{ i.quantity }}</b>
+                <br>
+                <b>Цена: {{ i.product.cost }}</b>
+                <br>
+            </ul>
+        </div>
+        <div class="cursor">
+            <a href="{% url 'storage_product_plus' i.product.pk %}">
+                <i class="bi bi-plus-lg"></i>
+            </a>
+            <a href="{% url 'storage_product_minus' i.product.pk %}">
+                <i class="bi bi-dash-lg"></i>
+            </a>
+            <a href="{% url 'storage_product_trash' i.product.pk %}">
+                <i class="bi bi-x-lg"></i>
+            </a>
+        </div>
+        <br>
+        {% endif %}
+        {% endfor %}
+        <h1>Итоговая цена: {{ storage.total_price }}</h1>
+        <a href="{% url 'buy' %}">
+            <button type="button" class="btn costume_btn">Купить</button>
+        </a>
+    </ul>
+    {% else %}
+    <div class="padding"></div>
+    <h1 class="favorite_text">Тут пока ничего нет</h1>
+    <div class="padding"></div>
+    {% endif %}
+
+    <div class="padding"></div>
+</div>
+{% endblock %}
